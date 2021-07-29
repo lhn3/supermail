@@ -2,7 +2,7 @@
     <div>
       <TabBar>
 <!--      path,act-color为父传子的值-->
-        <TabBarItem path="/home" act-color="#ff5712">
+        <TabBarItem path="/home">
           <img src="~assets/img/tabbar/home.svg" alt="" slot="img">
           <img src="~assets/img/tabbar/home_active.svg" alt="" slot="img-active">
           <div slot="text">首页</div>
