@@ -24,7 +24,8 @@
     },
     methods:{
       show(index){
-        return this.activate=index
+        this.activate=index
+        this.$emit('tabClick',index)
       }
     }
   }

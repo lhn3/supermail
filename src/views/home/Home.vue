@@ -3,73 +3,15 @@
     <NavBar class="home-nav">
       <div slot="center">购物街</div>
     </NavBar>
-    <HomeSwiper :banners="banners"></HomeSwiper>
-    <RecommendView :recommend="recommend"></RecommendView>
-    <FeatureView></FeatureView>
-    <TabControl :title="title" class="tab-control"></TabControl>
-    <GoodsList :goods="goods['pop'].list"></GoodsList>
-    <ul>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-      <li>1</li>
-    </ul>
+    <Scroll class="content" ref="scroll" :probeNum="3" @xy="xy" :pullUp="true" @pullUpLoad="pullUpLoad">
+      <HomeSwiper :banners="banners"></HomeSwiper>
+      <RecommendView :recommend="recommend"></RecommendView>
+      <FeatureView></FeatureView>
+      <TabControl :title="title" class="tab-control" @tabClick="tabClick"></TabControl>
+      <GoodsList :goods="showGoods"></GoodsList>
+    </Scroll>
+<!--    监听原生组件，使组件可以使用原生事件(.native)-->
+    <BackTop @click.native="back_top" v-show="isShow"></BackTop>
   </div>
 </template>
 
@@ -82,6 +24,9 @@
   import RecommendView from "./childComps/RecommendView";
   import {getHomeMultidata,getHomeGoods} from "network/home";
   import FeatureView from "./childComps/FeatureView";
+  import Scroll from "components/common/scroll/Scroll";
+  import BackTop from "../../components/content/backTop/BackTop";
+
   export default {
     name: "Home",
     components:{
@@ -90,7 +35,9 @@
       RecommendView,
       FeatureView,
       TabControl,
-      GoodsList
+      GoodsList,
+      Scroll,
+      BackTop
     },
     //data储存请求来的数据
     data(){
@@ -106,7 +53,11 @@
           'pop':{'page':0,list:[]},
           'new':{'page':0,list:[]},
           'sell':{'page':0,list:[]},
-        }
+        },
+        //默认显示流行
+        currentType:'pop',
+        //回到顶部按钮默认不显示
+        isShow:false,
       }
     },
     //组件窗前就发送网络请求
@@ -135,8 +86,48 @@
           //将页码改变成对应页数方便下次请求累计加一
           this.goods[type]['page']=page
         }).catch()
+      },
+
+      //点击切换不同分类
+      tabClick(index){
+        switch (index) {
+          case 0:
+            this.currentType='pop';
+            break
+          case 1:
+            this.currentType='new';
+            break
+          case 2:
+            this.currentType='sell';
+            break
+        }
+      },
+      //回到顶部按钮
+      back_top(){
+        //拿到取了scroll名字的组件scrollTo对象,(x,y,毫秒)
+        this.$refs.scroll.scrollto(0,0,500)
+      },
+
+      //回到顶部按钮的显示与隐藏
+      xy(position){
+        this.isShow = -position.y > 1500
+      },
+
+      //上拉加载更多
+      pullUpLoad(){
+        //调用页面加一的方法
+        this.getHomeGoods(this.currentType);
+        //刷新重新计算滑动高度防止卡顿
+        this.$refs.scroll.scroll.refresh()
+        //实现可多次加载更多
+        this.$refs.scroll.finishpullup()
       }
     },
+    computed:{
+      showGoods(){
+        return this.goods[this.currentType].list
+      }
+    }
   }
 </script>
 
@@ -160,5 +151,12 @@
     top: 44px;
     z-index: 9;
   }
-
+  .content{
+    overflow: hidden;
+    position: absolute;
+    top: 44px;
+    bottom: 49px;
+    left: 0;
+    right: 0;
+  }
 </style>
