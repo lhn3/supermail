@@ -3,11 +3,13 @@
     <NavBar class="home-nav">
       <div slot="center">购物街</div>
     </NavBar>
+      <TabControl :title="title" @tabClick="tabClick" ref="tabControl1" class="top-control" v-show="top_control"></TabControl>
     <Scroll class="content" ref="scroll" :probeNum="3" @xy="xy" :pullUp="true" @pullUpLoad="pullUpLoad">
-      <HomeSwiper :banners="banners"></HomeSwiper>
+<!--      swiperload获取最后加载的轮播图尺寸-->
+      <HomeSwiper :banners="banners" @swiperload="swiperload" ></HomeSwiper>
       <RecommendView :recommend="recommend"></RecommendView>
       <FeatureView></FeatureView>
-      <TabControl :title="title" class="tab-control" @tabClick="tabClick"></TabControl>
+      <TabControl :title="title" @tabClick="tabClick" ref="tabControl2"></TabControl>
       <GoodsList :goods="showGoods"></GoodsList>
     </Scroll>
 <!--    监听原生组件，使组件可以使用原生事件(.native)-->
@@ -58,6 +60,10 @@
         currentType:'pop',
         //回到顶部按钮默认不显示
         isShow:false,
+        //设置多加的一个分类选项默认不显示
+        top_control:false,
+        //默认高度为零
+        offsettop:0
       }
     },
     //组件窗前就发送网络请求
@@ -101,6 +107,10 @@
             this.currentType='sell';
             break
         }
+        //使两个标签同步显示
+        this.$refs.tabControl1.activate=index
+        this.$refs.tabControl2.activate=index
+
       },
       //回到顶部按钮
       back_top(){
@@ -108,20 +118,28 @@
         this.$refs.scroll.scrollto(0,0,500)
       },
 
-      //回到顶部按钮的显示与隐藏
       xy(position){
-        this.isShow = -position.y > 1500
+      //回到顶部按钮的显示与隐藏
+        this.isShow = -position.y > 1500;
+        this.top_control= -position.y>this.offsettop
       },
 
       //上拉加载更多
       pullUpLoad(){
         //调用页面加一的方法
         this.getHomeGoods(this.currentType);
-        //刷新重新计算滑动高度防止卡顿
-        this.$refs.scroll.scroll.refresh()
+        //刷新重新计算滑动高度防止回弹卡顿
+        this.$refs.scroll.refreshes()
         //实现可多次加载更多
         this.$refs.scroll.finishpullup()
+      },
+
+      // 监听轮播图加载完成
+      swiperload(){
+        // 获取组件的offsetTop,组件的$el属性用于获取组件中的元素
+        this.offsettop=this.$refs.tabControl2.$el.offsetTop;
       }
+
     },
     computed:{
       showGoods(){
@@ -133,24 +151,21 @@
 
 <style scoped>
   #home{
-    padding-top: 44px;
+    overflow: hidden;
+    bottom: 0;
   }
   .home-nav{
     background-color: var(--color-tint);
     color: white;
     font-size: 1.2em;
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
+
+  }
+
+  .top-control{
+    position: relative;
     z-index: 9;
   }
-    /*悬停效果*/
-  .tab-control{
-    position: sticky;
-    top: 44px;
-    z-index: 9;
-  }
+
   .content{
     overflow: hidden;
     position: absolute;
