@@ -4,7 +4,7 @@
       <div slot="center">购物街</div>
     </NavBar>
       <TabControl :title="title" @tabClick="tabClick" ref="tabControl1" class="top-control" v-show="top_control"></TabControl>
-    <Scroll class="content" ref="scroll" :probeNum="3" @xy="xy" :pullUp="true" @pullUpLoad="pullUpLoad">
+      <Scroll class="content" ref="scroll" :probeNum="3" @xy="xy" :pullUp="true" @pullUpLoad="pullUpLoad">
 <!--      swiperload获取最后加载的轮播图尺寸-->
       <HomeSwiper :banners="banners" @swiperload="swiperload" ></HomeSwiper>
       <RecommendView :recommend="recommend"></RecommendView>
@@ -63,7 +63,10 @@
         //设置多加的一个分类选项默认不显示
         top_control:false,
         //默认高度为零
-        offsettop:0
+        offsettop:0,
+
+        // //记录当前位置，回来保持当前位置
+        // savey:0
       }
     },
     //组件窗前就发送网络请求
@@ -145,7 +148,20 @@
       showGoods(){
         return this.goods[this.currentType].list
       }
-    }
+    },
+    //
+    // //回来时定位到之前离开时的位置
+    // activated() {
+    //   this.$refs.scroll.refreshes()
+    //   this.$refs.scroll.scrollto(0,this.savey,0)
+    // },
+    // //离开时记录坐标用的y的位置
+    // deactivated() {
+    //   this.savey=this.$refs.scroll.scroll.on('scroll',(position)=>{
+    //         position
+    //       }).y;
+    // }
+
   }
 </script>
 

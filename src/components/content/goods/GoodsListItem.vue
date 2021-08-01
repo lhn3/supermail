@@ -1,6 +1,6 @@
 <template>
-  <div class="goods-list-item">
-    <a :href="goodsItem.link"><img :src="goodsItem.show.img" alt=""></a>
+  <div class="goods-list-item" @click="detail">
+    <img :src="goodsItem.show.img" alt="">
     <div class="goods-info">
       <p>{{ goodsItem.title }}</p>
       <span class="price">￥{{ goodsItem.price }}</span>
@@ -10,6 +10,7 @@
 </template>
 
 <script>
+// import Detail from "views/detail/Detail";
   export default {
     name: "GoodsListItem",
     props:{
@@ -18,6 +19,12 @@
         default(){
           return {}
         }
+      }
+    },
+    methods:{
+      //点击进入详情页路由
+      detail(){
+        this.$router.push('/detail/'+this.goodsItem.iid)
       }
     }
   }

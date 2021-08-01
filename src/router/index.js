@@ -6,6 +6,7 @@ const Home = () => import('../views/home/Home')
 const Category = () => import('../views/category/Category')
 const Profile = () => import('../views/profile/Profile')
 const Shopcart = () => import('../views/shopcart/Shopcart')
+const Detail = () => import('../views/detail/Detail')
 
 Vue.use(Router)
 
@@ -35,6 +36,12 @@ export default new Router({
       path: '/shopcart',
       name: 'shopcart',
       component:Shopcart,
-    }
+    },
+    {
+      path: '/detail/:id',
+      name: 'detail',
+      component:Detail,
+    },
+
   ]
 })
