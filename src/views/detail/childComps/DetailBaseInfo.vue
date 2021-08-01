@@ -6,7 +6,7 @@
       <div class="price">
         <span class="newPrice">{{goods.newPrice}}</span>
         <span class="oldPrice">{{goods.oldPrice}}</span>
-        <span class="discount">{{goods.discount}}</span>
+        <span class="discount" v-show="goods.discount">{{goods.discount}}</span>
       </div>
       <div class="info-other">
         <span>{{goods.columns[0]}}</span>
@@ -14,7 +14,7 @@
         <span>{{goods.columns[2]}}</span>
       </div>
       <div class="service">
-        <span v-for="(item,index) in goods.services" :key="index" >
+        <span v-for="(item,index) in goods.services" v-show="index" :key="index" >
           <img :src="item.icon" alt="">
           <span>{{item.name}}</span>
         </span>
@@ -88,7 +88,7 @@ export default {
 }
 .service{
   display: flex;
-  line-height: 40px;
+  line-height: 60px;
   justify-content: space-between;
 }
 .service img{
