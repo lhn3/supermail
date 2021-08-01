@@ -58,9 +58,11 @@
           });
 
           //上拉加载更多
-        this.scroll && this.scroll.on('pullingUp',()=>{
-          this.$emit('pullUpLoad')
-        });
+        if (this.pullUp){
+          this.scroll && this.scroll.on('pullingUp',()=>{
+            this.$emit('pullUpLoad')
+          });
+        }
       },
 
       methods:{
