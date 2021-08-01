@@ -65,8 +65,8 @@
         //默认高度为零
         offsettop:0,
 
-        // //记录当前位置，回来保持当前位置
-        // savey:0
+        //记录当前位置，回来保持当前位置
+        savey:0
       }
     },
     //组件窗前就发送网络请求
@@ -149,18 +149,18 @@
         return this.goods[this.currentType].list
       }
     },
-    //
-    // //回来时定位到之前离开时的位置
-    // activated() {
-    //   this.$refs.scroll.refreshes()
-    //   this.$refs.scroll.scrollto(0,this.savey,0)
-    // },
-    // //离开时记录坐标用的y的位置
-    // deactivated() {
-    //   this.savey=this.$refs.scroll.scroll.on('scroll',(position)=>{
-    //         position
-    //       }).y;
-    // }
+
+    //回来时定位到之前离开时的位置
+    activated() {
+      this.$refs.scroll.refreshes()
+      this.$refs.scroll.scrollto(0,this.savey,0)
+    },
+    //离开时记录坐标用的y的位置
+    deactivated() {
+      this.savey=this.$refs.scroll.scroll.on('scroll',(position)=>{
+            position
+          }).y;
+    }
 
   }
 </script>
