@@ -1,6 +1,6 @@
 <template>
   <div>
-  <!--  判断最想中是否有内容-->
+  <!--  判断响应中是否有内容-->
     <div v-if="Object.keys(goods).length !== 0" class="base-info">
       <div class="title-info">{{goods.title}}</div>
       <div class="price">
