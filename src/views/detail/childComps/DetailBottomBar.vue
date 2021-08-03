@@ -15,7 +15,7 @@
         </div>
       </div>
       <div class="bar-item bar-right">
-        <div class="cart">加入购物车</div>
+        <div class="cart" @click="addTo">加入购物车</div>
         <div class="buy">购买</div>
       </div>
 <!--      <sport-ball></sport-ball>-->
@@ -23,9 +23,15 @@
 </template>
 
 <script>
-    export default {
-        name: "DetailBottomBar"
+  export default {
+    name: "DetailBottomBar",
+    methods:{
+      addTo(){
+        this.$emit('addToShop')
+      }
     }
+  }
+
 </script>
 
 <style scoped>

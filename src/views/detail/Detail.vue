@@ -11,7 +11,7 @@
       <GoodsList :goods="recommend" ref="goodsInfo"></GoodsList>
     </Scroll>
     <BackTop @click.native="back_top" v-show="isShow"></BackTop>
-    <DetailBottomBar></DetailBottomBar>
+    <DetailBottomBar @addToShop="addToShop"></DetailBottomBar>
   </div>
 </template>
 
@@ -49,6 +49,7 @@ export default {
   mixins:[resMixin],
     data(){
       return{
+        iid:null,
         topImage:[],
         //如要传入对象，默认也要为对象，否则报错
         goods:{},
@@ -75,7 +76,8 @@ export default {
 
   created() {
       //取到id值传入路由请求中
-      getDetail(this.$route.params.id).then(res=>{
+      this.iid=this.$route.params.id
+      getDetail(this.iid).then(res=>{
         const data=res.result
         // console.log(res.result);
         //轮播图数据获取
@@ -97,7 +99,6 @@ export default {
        detailRecommend().then(res => {
           this.recommend=res.data.list
         });
-
     },
   updated() {
      //各标签顶部位置获取
@@ -153,6 +154,20 @@ export default {
         }
       }
     },
+
+    //添加到购物车
+    addToShop(){
+      const product={}
+      product.image=this.topImage[0]
+      product.title=this.goods.title
+      product.desc=this.goods.desc
+      product.price=this.goods.relPrice
+      product.id=this.iid;
+      product.num=1
+      // this.$store.commit('addCart',product)
+      this.$store.dispatch('addCart',product)
+      // console.log(product)
+    }
   },
 }
 </script>
