@@ -124,6 +124,7 @@
       xy(position){
       //回到顶部按钮的显示与隐藏
         this.isShow = -position.y > 1500;
+      //多加的分类显示与隐藏
         this.top_control= -position.y>this.offsettop
       },
 
@@ -139,7 +140,7 @@
 
       // 监听轮播图加载完成
       swiperload(){
-        // 获取组件的offsetTop,组件的$el属性用于获取组件中的元素
+        // 获取组件的offsetTop,组件的$el属性用于获取组件中元素的最外层标签的y坐标位置
         this.offsettop=this.$refs.tabControl2.$el.offsetTop;
       }
 

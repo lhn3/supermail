@@ -16,7 +16,7 @@
           <span>{{item.style}}</span>
         </div>
         <div class="info-imgs" v-if="item.images">
-          <img src="" :alt="i" v-for="(i,j) in item.images" :key="j">
+          <img :src="i" alt="" v-for="(i,j) in item.images" :key="j">
         </div>
       </div>
     </div>

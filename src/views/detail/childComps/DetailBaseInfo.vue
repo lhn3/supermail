@@ -19,8 +19,6 @@
           <span>{{item.name}}</span>
         </span>
       </div>
-
-
     </div>
   </div>
 </template>

@@ -21,27 +21,39 @@
       detailImages:{
         tupe:Object,
         default(){
-          return {}
+          return {
+          }
         }
+      }
+    },
+    data(){
+      return {
+        res:null,
+        //调用防抖函数并赋值
+        bs:this.debounce(this.$emit('imageLoad'),500)
       }
     },
   methods:{
     //定义防抖函数
     debounce(func,time){
-        let res=null
-        return function(...args){
-            //如果res不为null，则清除计时器
-            if(res) clearTimeout(res)
-            res=setTimeout(()=>{
-                func.apply(this,args)
-            },time)
-        }
+      // let res=null
+      return function(){
+          //如果res不为null，则清除计时器
+          if(this.res) {
+            clearTimeout(this.res)
+          }
+          this.res=setTimeout(()=>{
+            func
+          },time)
+      }
+
     },
     //监听图片有一张图就调用一次
     imgLoad(){
     //调用防抖函数传入要执行的内容和时间
-    this.debounce(this.$emit('imageLoad'),500)
+      this.bs()
     }
+
     },
   }
 </script>

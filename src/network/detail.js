@@ -45,3 +45,9 @@ export class  GoodsParam {
 }
 
 
+//推荐商品
+export function detailRecommend() {
+  return request({
+    url:'/Recommend',
+  })
+}

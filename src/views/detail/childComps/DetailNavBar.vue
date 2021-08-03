@@ -32,6 +32,7 @@ export default {
     //记录点击标签上的位置
     detailClick(index){
       this.current=index
+      this.$emit("titleClick",index)
     },
     //返回上一个路由
     back(){
