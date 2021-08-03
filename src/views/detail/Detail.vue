@@ -10,7 +10,8 @@
       <DetailComment :commentInfo="commentInfo" ref="comment"></DetailComment>
       <GoodsList :goods="recommend" ref="goodsInfo"></GoodsList>
     </Scroll>
-      <BackTop @click.native="back_top" v-show="isShow"></BackTop>
+    <BackTop @click.native="back_top" v-show="isShow"></BackTop>
+    <DetailBottomBar></DetailBottomBar>
   </div>
 </template>
 
@@ -27,6 +28,7 @@ import DetailComment from "./childComps/DetailComment";
 import GoodsList from "components/content/goods/GoodsList";
 import {resMixin} from "../../common/mixin";
 import BackTop from "components/content/backTop/BackTop";
+import DetailBottomBar from "./childComps/DetailBottomBar";
 
 export default {
     name: "Detail",
@@ -41,6 +43,7 @@ export default {
       DetailComment,
       GoodsList,
       BackTop,
+      DetailBottomBar,
     },
   //导入混入函数
   mixins:[resMixin],
@@ -169,6 +172,6 @@ export default {
   }
 
   .content{
-    height: calc(100% - 44px);
+    height: calc(100% - 44px - 58px);
   }
 </style>
