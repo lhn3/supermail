@@ -25,6 +25,7 @@
 
 <style scoped>
   .check{
+    height: 20px;
     border-radius: 50%;
     border: solid 2px #aaa;
   }

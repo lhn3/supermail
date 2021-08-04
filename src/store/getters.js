@@ -9,5 +9,12 @@ export default {
   },
   cartlist(state){
     return state.cartList
-  }
+  },
+
+  //返回选中的商品列表
+  relCheck(state){
+    return state.cartList.filter(function (cart) {
+      return cart.slt
+    })
+  },
 }

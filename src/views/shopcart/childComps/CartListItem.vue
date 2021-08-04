@@ -52,7 +52,6 @@
     border-bottom: 1px solid #ccc;
   }
   .item-selector{
-    width: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
