@@ -6,5 +6,8 @@ export default {
     }else {
       return 0
     }
+  },
+  cartlist(state){
+    return state.cartList
   }
 }

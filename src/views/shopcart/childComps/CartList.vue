@@ -1,22 +1,29 @@
 <template>
     <div class="cart-list">
-      <CartListItem></CartListItem>
+      <CartListItem v-for="(item,index) in cartlist" :key="index" :product="item"></CartListItem>
     </div>
 </template>
 
 <script>
   import CartListItem from "./CartListItem";
-    export default {
-        name: "CartList",
-      components:{
-          CartListItem,
-      },
-      data(){
-          return{
-          }
-      },
+  import {mapGetters} from "vuex"
+  export default {
+    name: "CartList",
+    components:{
+      CartListItem,
+    },
+    data(){
+        return{
+        }
+    },
+    computed:{
+      ...mapGetters(["cartlist"])
+    },
+    methods:{
 
     }
+
+  }
 </script>
 
 <style scoped>

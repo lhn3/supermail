@@ -164,9 +164,9 @@ export default {
       product.price=this.goods.relPrice
       product.id=this.iid;
       product.num=1
-      // this.$store.commit('addCart',product)
+      product.slt=true
+      //调用actions异步操作
       this.$store.dispatch('addCart',product)
-      // console.log(product)
     }
   },
 }

@@ -4,7 +4,8 @@
       <div slot="center">购物车({{cartLength}})</div>
     </NavBar>
     <Scroll class="content" ref="scroll" :probeNum="3">
-    <ul>
+      <CartList></CartList>
+      <ul>
       <li>1111111111111</li>
       <li>1111111111111</li>
       <li>1111111111111</li>
@@ -114,11 +115,13 @@
   import NavBar from "components/common/navbar/NavBar";
   import Scroll from "components/common/scroll/Scroll";
   import { mapGetters } from 'vuex'
+  import CartList from "./childComps/CartList";
   export default {
     name: "Shopcart",
     components:{
       NavBar,
-      Scroll
+      Scroll,
+      CartList
     },
     data(){
       return{
