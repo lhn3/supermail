@@ -70,7 +70,9 @@ export default {
         titleIndex:0,
         //每个组件要跳转的坐标Y值
         topy:[],
-        ind:''
+        ind:'',
+        //弹窗内容
+        message:''
       }
     },
 
@@ -166,7 +168,9 @@ export default {
       product.num=1
       product.slt=true
       //调用actions异步操作
-      this.$store.dispatch('addCart',product)
+      this.$store.dispatch('addCart',product).then(res=>{
+        this.$toast.show(res,2000)
+      })
     }
   },
 }

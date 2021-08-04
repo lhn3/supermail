@@ -5,7 +5,7 @@
         <span class="text">全选</span>
       </div>
       <div class="total">合计：￥{{totalPrice}}</div>
-      <div class="calculate">去支付({{totalSelect}})</div>
+      <div class="calculate" @click="calculate">去支付({{totalSelect}})</div>
     </div>
 </template>
 
@@ -38,8 +38,6 @@
         }else {
           return false
         }
-
-
       }
     },
     methods:{
@@ -51,7 +49,16 @@
         }else {
           this.$store.commit('select_all')
         }
+      },
+      //去支付
+      calculate(){
+        if(this.$store.getters.relCheck.length){
+          this.$toast.show('支付成功！',2000)
+        }else {
+          this.$toast.show('请选择商品！',2000)
+        }
       }
+
     }
   }
 </script>
@@ -94,7 +101,5 @@
     background-color: var(--color-tint);
     color: white;
   }
-  .active{
 
-  }
 </style>
