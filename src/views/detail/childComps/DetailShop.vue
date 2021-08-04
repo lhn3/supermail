@@ -8,11 +8,11 @@
 <!--      左边-->
       <div class="shop-left">
         <div class="shop-sell">
-          <div class="shop-sell-num">{{shop.sell | selles}}万</div>
+          <div class="shop-sell-num">{{shop.sell | selles}}</div>
           <div class="shop-sell-text">总销量</div>
         </div>
         <div class="shop-goods">
-          <div class="shop-goods-num">{{shop.goods}}</div>
+          <div class="shop-goods-num">{{shop.goods | selles}}</div>
           <div class="shop-goods-text">全部宝贝</div>
         </div>
       </div>
@@ -51,7 +51,11 @@ export default {
   },
   filters:{
     selles(num){
-       return (num/10000).toFixed(1);
+      if(num<10000){
+        return num
+      }else{
+        return (num/10000).toFixed(1)+'万';
+      }
     },
     //评价过滤器
     abs(res){

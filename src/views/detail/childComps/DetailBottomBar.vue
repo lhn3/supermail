@@ -44,6 +44,7 @@
     right: 0;
     display: flex;
     text-align: center;
+    z-index: 9;
   }
   .bar-item{
     flex: 1;

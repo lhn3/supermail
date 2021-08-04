@@ -174,19 +174,21 @@ export default {
 
 <style scoped>
   #detail{
-    position: relative;
-    z-index: 9;
-    background-color: white;
-    height: 100vh;
+    overflow: hidden;
+    bottom: 0;
   }
+
   .detail-nav{
-    /*脱离标准流*/
-    position: relative;
-    z-index: 9;
     background-color: white;
+    font-size: 1.2em;
   }
 
   .content{
-    height: calc(100% - 44px - 58px);
+    overflow: hidden;
+    position: absolute;
+    top: 44px;
+    bottom: 49px;
+    left: 0;
+    right: 0;
   }
 </style>
