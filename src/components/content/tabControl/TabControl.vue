@@ -36,6 +36,7 @@
     display: flex;
     text-align: center;
     background-color: white;
+    font-size: 14px;
   }
   .tab-control-item{
     flex: 1;

@@ -31,5 +31,6 @@
   .center{
     flex: 1;
     text-align: center;
+    font-size: 18px;
   }
 </style>

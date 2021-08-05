@@ -37,7 +37,7 @@
 
 <style scoped>
   .toast{
-    font-size: 1.1em;
+    font-size: 16px;
     position: fixed;
     color: white;
     background-color: rgba(0,0,0,0.6);

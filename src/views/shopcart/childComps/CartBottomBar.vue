@@ -74,6 +74,7 @@
     display: flex;
     text-align: center;
     z-index: 9;
+    font-size: 14px;
   }
  .all-selector{
    width: 20%;
