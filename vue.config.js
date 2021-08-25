@@ -1,5 +1,6 @@
 //别名配置
 module.exports={
+  publicPath:'./',
  configureWebpack:{
      resolve:{
          alias:{
